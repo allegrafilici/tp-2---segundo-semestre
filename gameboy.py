@@ -1,7 +1,8 @@
 from PIL import Image
 import numpy as np
 
-def convertir_imagen(ruta):#definir ruta en la main
+ruta=Image.open("monalisa.jpg")
+def convertir_imagen(ruta):
     GAMEBOY = [(15, 56, 15), (48, 98, 48), (139, 172, 15), (155, 188, 15)]
     BAYER_4 = [
     [ 0,  8,  2, 10],
@@ -33,4 +34,8 @@ def convertir_imagen(ruta):#definir ruta en la main
                 matriz[y,x]=GAMEBOY[3]
 
     return matriz
-            
+
+Image.fromarray(convertir_imagen(ruta)).show
+
+
+    
