@@ -35,4 +35,5 @@ def convertir_imagen(ruta):
 
     return matriz
 
-Image.fromarray(convertir_imagen(ruta)).show
+resultado=Image.fromarray(convertir_imagen(ruta))
+resultado.show()
