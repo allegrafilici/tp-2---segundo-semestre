@@ -26,7 +26,7 @@ def scanlines(copia):
     for y in range(0,240,2): 
         for x in range(320): 
             pixel = copia[y,x]
-            for c in range(3):
+            for c in in range(3):
                 copia[y,x,c] = round(int(pixel[c])/ 2 )
     return copia 
 
@@ -36,3 +36,21 @@ def filtro_crt(ruta,desplazamiento):
     canales_desplazados = desplazar_canales(resolucion,desplazamiento)
     scanlines_resultado = scanlines(canales_desplazados)
     return scanlines_resultado
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
