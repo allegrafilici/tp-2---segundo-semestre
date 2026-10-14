@@ -1,7 +1,7 @@
 from PIL import Image
 import numpy as np
 
-ruta=Image.open("monalisa.jpg")
+ruta="monalisa.jpg"
 def convertir_imagen(ruta):
     GAMEBOY = [(15, 56, 15), (48, 98, 48), (139, 172, 15), (155, 188, 15)]
     BAYER_4 = [
@@ -37,3 +37,33 @@ def convertir_imagen(ruta):
 
 resultado=Image.fromarray(convertir_imagen(ruta))
 resultado.show()
+
+def dimension_pantalla():
+    img= Image.open("gameboy_mascara.png")
+    mascara=np.array(img)
+    alto,ancho=mascara.shape 
+    
+    altura_pantalla=[]
+    ancho_pantalla=[]
+    for y in range(alto):
+        for x in range(ancho):
+            pixel=mascara[y,x]
+            if pixel==255:
+                altura_pantalla.append(y)
+                ancho_pantalla.append(x)
+    punto_0=(ancho_pantalla[0],altura_pantalla[0])
+    punto_1=(ancho_pantalla[-1],altura_pantalla[-1])
+    return punto_0,punto_1
+
+def pantalla_gameboy(matriz,punto_0,punto_1):
+    gameboy= Image.open("gameboy.png")
+    mascara=Image.open("gameboy_mascara.png")
+    nuevo_ancho=punto_1[0]-punto_0[0]+1
+    nuevo_alto=punto_1[1]-punto_0[1]+1
+    foto= matriz.resize(nuevo_ancho,nuevo_alto)
+    alto,ancho=mascara.shape
+    for y in range(alto):
+        for x in range(ancho):
+            pixel= mascara[y,x]
+            if pixel==0:
+                pixel=gameboy[y,x]

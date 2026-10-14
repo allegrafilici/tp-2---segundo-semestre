@@ -52,10 +52,3 @@ imagen_resultado.show()
 
 
 
-
-
-
-
-
-
-
