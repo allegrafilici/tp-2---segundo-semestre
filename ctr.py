@@ -36,14 +36,3 @@ def filtro_crt(ruta,desplazamiento):
     canales_desplazados = desplazar_canales(resolucion,desplazamiento)
     scanlines_resultado = scanlines(canales_desplazados)
     return scanlines_resultado
-
-
-
-
-
-            
-
-
-
-
-
