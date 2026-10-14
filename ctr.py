@@ -39,12 +39,48 @@ def filtro_crt(ruta,desplazamiento):
 
 resultado = filtro_crt("marilyn.jpeg", 3)
 imagen_resultado = Image.fromarray(resultado)
-imagen_resultado.show()
 
 
 #insertar la imagen en la pantalla 
+def recorrer_mascara(ruta_mascara):
+    mascara = Image.open(ruta_mascara)
+    matriz_mascara = np.array(mascara)
+    alto,ancho = matriz_mascara.shape
+    altura_pantalla = []
+    ancho_pantalla = []
+    for y in range(alto):
+        for x in range(ancho): 
+            if matriz_mascara[y,x] == 255:
+                altura_pantalla.append(y)
+                ancho_pantalla.append(x)
+    punto_0 = (min(ancho_pantalla),min(altura_pantalla))
+    punto_1 = (max(ancho_pantalla),max(altura_pantalla))
+    return punto_0,punto_1
+
+def pantalla_crt(matriz,punto_0,punto1):
+    tv_ctr = Image.open("tv.png")
+    mascara = Image.open("tv_mascara.png")
+    nuevo_ancho = punto_1[0] - punto_0[0] + 1 
+    nuevo_alto = punto_1[1] - punto_0[1] + 1 
+    foto = Image.fromarray(matriz)
+    foto = foto.resize((nuevo_ancho,nuevo_alto))
+    matriz_foto = np.array(foto)
+    matriz_mascara = np.array(mascara)
+    copia_tv = np.array(tv_ctr).copy()
+    alto,ancho = matriz_mascara.shape
+
+    for y in range(alto):
+        for x in range(ancho):
+            if matriz_mascara[y,x] == 255: 
+                copia_tv[y,x] = matriz_foto[y - punto_0[1], x - punto_0[0]]
+    return copia_tv
 
 
+resultado = filtro_crt("marilyn.jpeg", 3)
+punto_0, punto_1 = recorrer_mascara("tv_mascara.png")
+resultado_tv = pantalla_crt(resultado, punto_0, punto_1)
+
+Image.fromarray(resultado_tv).show()
 
             
 
