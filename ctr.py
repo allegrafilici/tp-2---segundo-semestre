@@ -72,7 +72,7 @@ def recorrer_mascara(ruta_mascara:str)-> tuple[tuple[int, int], tuple[int, int]]
     punto_1 = (max(ancho_pantalla),max(altura_pantalla))
     return punto_0,punto_1
 
-def pantalla_ctr(matriz:np.ndarray,punto_0:tuple[int,int],punto1:tuple[int,int]):
+def pantalla_ctr(matriz:np.ndarray,punto_0:tuple[int,int],punto_1:tuple[int,int]):
     """Inserta una imagen filtrada en la pantalla de tv.png. 
     Redimensiona la imagen al rectangulo indicado y rempalza los pixeles del televisor donde 
     tv_mascara.png es balnca. Conserva el resto de la foto del aparato. 
@@ -94,9 +94,5 @@ def pantalla_ctr(matriz:np.ndarray,punto_0:tuple[int,int],punto1:tuple[int,int])
                 copia_tv[y,x] = matriz_foto[y - punto_0[1], x - punto_0[0]]
     return copia_tv
 
-
-resultado = filtro_crt("marilyn.jpeg", 3)
-punto_0, punto_1 = recorrer_mascara("tv_mascara.png")
-resultado_tv = pantalla_ctr(resultado, punto_0, punto_1)
 
 

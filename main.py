@@ -62,5 +62,6 @@ def main():
 
     resultado.save(guardar)
     print(f"Imagen guardada en {guardar}")
+    return
 
 main()
