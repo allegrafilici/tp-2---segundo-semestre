@@ -48,10 +48,6 @@ def filtro_crt(ruta:str,desplazamiento:int)->np.ndarray:
     scanlines_resultado = scanlines(canales_desplazados)
     return scanlines_resultado
 
-resultado = filtro_crt("marilyn.jpeg", 3)
-imagen_resultado = Image.fromarray(resultado)
-
-
 
 #insertar la imagen en la pantalla 
 def recorrer_mascara(ruta_mascara:str)-> tuple[tuple[int, int], tuple[int, int]]:

@@ -11,10 +11,10 @@ def pedir_ruta():
 
 
 def pedir_metodo():
-    metodo = input("Seleccione la pantalla (gameboy/crt): ")
-    if metodo.lower() == "gameboy":
+    metodo = input("Seleccione la pantalla (gameboy/crt): ").lower()
+    if metodo == "gameboy":
         return "gameboy"
-    elif metodo.lower() == "crt":
+    elif metodo == "crt":
         return "crt"
     return None
 
@@ -24,7 +24,7 @@ def guardar_imagen():
 
 
 def pedir_desplazamiento():
-    respuesta = input("INgrese desplazamiento (Enter para usar 3 )")
+    respuesta = input("Ingrese desplazamiento (Enter para usar 3 )")
 
     while respuesta != "":
         if respuesta.isdecimal():
@@ -59,6 +59,7 @@ def main():
 
     else:
         print("Pantalla inválida. Las opciones son 'gameboy' o 'crt'.")
+        return
 
     resultado.save(guardar)
     print(f"Imagen guardada en {guardar}")
