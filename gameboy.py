@@ -1,7 +1,6 @@
 from PIL import Image
 import numpy as np
 
-ruta="monalisa.jpg"
 def convertir_imagen(ruta:str):
     """Recibe la ruta de una imagen, la abre y la tranforma en una matriz de 144x160 
     y finalmete le aplica una tonalidad e verde a cada pixel segun el brillo calculado.
@@ -79,8 +78,3 @@ def pantalla_gameboy(matriz:np.ndarray,punto_0:tuple[int,int],punto_1:tuple[int,
                 gameboy[y, x]=foto[y-punto_0[1],x-punto_0[0]]
 
     return Image.fromarray(gameboy)
-
-matriz = convertir_imagen(ruta)
-punto_0, punto_1, mascara = dimension_pantalla()
-resultado = pantalla_gameboy(matriz, punto_0, punto_1, mascara)
-resultado.show()
