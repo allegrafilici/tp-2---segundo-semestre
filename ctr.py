@@ -12,7 +12,7 @@ def ajustar_resolucion(ruta:str) -> np.ndarray:
     matriz = np.array(imagen_ajustada)
     return matriz 
 
-def desplazar_canales(matriz:np.darray,desplazamiento:int)-> np.ndarray:
+def desplazar_canales(matriz:np.ndarray,desplazamiento:int)-> np.ndarray:
     """dependiendo del desplazamiento , se recore la imagen y se desplaza el rojo y el azul
     Cada pixel toma el rojode una posiciona su izquierda y el azul de una posicion a la derecha. 
     El verde permanece igual. Si la posicionde origen queda fuera de laimage , conserva el canal original. """
