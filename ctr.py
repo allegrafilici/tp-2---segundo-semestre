@@ -25,7 +25,7 @@ def desplazar_canales(matriz:np.darray,desplazamiento:int)-> np.ndarray:
                 copia[y,x,2] = matriz[y, x+ desplazamiento,2]
     return copia 
 
-def scanlines(copia:np.darray)-> np.ndarray:
+def scanlines(copia:np.ndarray)-> np.ndarray:
     """Oscurece las filas pares de una imagen. 
     Divide por dos los tres canales de cada pizel de las filas pares y tambien
     redondea el resultado. Retorna la misma matriz pero con las filas pares
