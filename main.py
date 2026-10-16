@@ -36,9 +36,6 @@ def pedir_desplazamiento():
 
     return 3 
         
-
-
-
 def main():
     ruta = pedir_ruta()
     if ruta is None:
@@ -58,7 +55,6 @@ def main():
         punto_0, punto_1 = recorrer_mascara("tv_mascara.png")
         matriz_tv = pantalla_ctr(matriz, punto_0, punto_1)
         resultado = Image.fromarray(matriz_tv)
-
 
     else:
         print("Pantalla inválida. Las opciones son 'gameboy' o 'crt'.")
