@@ -62,7 +62,7 @@ def main():
         return
 
     resultado.save(guardar)
-    print(f"Imagen guardada en {guardar}")
+    print(f"\nImagen guardada en {guardar}")
     return
 
 main()
