@@ -2,7 +2,10 @@ from PIL import Image
 import numpy as np
 
 ruta="monalisa.jpg"
-def convertir_imagen(ruta):
+def convertir_imagen(ruta:str):
+    """Recibe la ruta de una imagen, la abre y la tranforma en una matriz de 144x160 
+    y finalmete le aplica una tonalidad e verde a cada pixel segun el brillo calculado.
+    Devuelve una imagen de numpy """
     GAMEBOY = [(15, 56, 15), (48, 98, 48), (139, 172, 15), (155, 188, 15)]
     BAYER_4 = [
     [ 0,  8,  2, 10],
@@ -36,6 +39,9 @@ def convertir_imagen(ruta):
     return matriz
 
 def dimension_pantalla():
+    """No recibe ningun argumento, la funcion sirve especificamente para calcular 
+    las dimensiones de la pantalla de la mascara de la gameboy.
+    Devuelve el punto (x0,yo) y el (x1,y1), ademas de una imagen de numpy de la mascara"""
     img= Image.open("gameboy_mascara.png")
     mascara=np.array(img)
     alto,ancho=mascara.shape 
@@ -52,7 +58,11 @@ def dimension_pantalla():
     punto_1=(max(ancho_pantalla),altura_pantalla[-1])
     return punto_0,punto_1,mascara
 
-def pantalla_gameboy(matriz,punto_0,punto_1,mascara):
+def pantalla_gameboy(matriz:np.ndarray,punto_0:tuple[int,int],punto_1:tuple[int,int],mascara:np.ndarray):
+    """La funcion recibe dos imagenes de numpy, la mascara y la matriz, y los puntos
+    (x0,yo),(x1,y1).Redimensiona a la matriz al tamaño de la pantalal de la mascara e inserta 
+    la matriz dentro de la la pantalla de la gameboy.
+    Devuelve una imagen de pillow."""
     alto,ancho=mascara.shape
     marco= Image.open("gameboy.png")
     gameboy= np.array(marco.resize((ancho,alto)))
