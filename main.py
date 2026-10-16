@@ -39,17 +39,18 @@ def pedir_desplazamiento():
 def main():
     ruta = pedir_ruta()
     if ruta is None:
-        print('No se encontró la imagen. Por favor, verifique la ruta e intente nuevamente.')
+        print(f'\nNo se encontró la imagen. Por favor, verifique la ruta e intente nuevamente.')
         return
     metodo = pedir_metodo()
-    guardar=guardar_imagen()
     if metodo=="gameboy":
+        guardar=guardar_imagen()
         matriz = convertir_imagen(ruta)
         punto_0, punto_1, mascara = dimension_pantalla()
         resultado = pantalla_gameboy(matriz, punto_0, punto_1, mascara)
         resultado.show()
 
     elif metodo=="crt":
+        guardar=guardar_imagen()
         desplazamiento = pedir_desplazamiento()
         matriz = filtro_crt(ruta, desplazamiento)
         punto_0, punto_1 = recorrer_mascara("tv_mascara.png")
@@ -58,7 +59,7 @@ def main():
         resultado.show()
 
     else:
-        print("Pantalla inválida. Las opciones son 'gameboy' o 'crt'.")
+        print(f"\nPantalla inválida. Las opciones son 'gameboy' o 'crt'.")
         return
 
     resultado.save(guardar)
