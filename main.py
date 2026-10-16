@@ -55,13 +55,12 @@ def main():
         punto_0, punto_1 = recorrer_mascara("tv_mascara.png")
         matriz_tv = pantalla_ctr(matriz, punto_0, punto_1)
         resultado = Image.fromarray(matriz_tv)
+        resultado.show()
 
     else:
         print("Pantalla inválida. Las opciones son 'gameboy' o 'crt'.")
 
-    print(f"Imagen guardada en {guardar}")
     resultado.save(guardar)
-    resultado.show()
     print(f"Imagen guardada en {guardar}")
 
 main()
