@@ -35,9 +35,6 @@ def convertir_imagen(ruta):
 
     return matriz
 
-resultado=Image.fromarray(convertir_imagen(ruta))
-resultado.show()
-
 def dimension_pantalla():
     img= Image.open("gameboy_mascara.png")
     mascara=np.array(img)
@@ -51,19 +48,29 @@ def dimension_pantalla():
             if pixel==255:
                 altura_pantalla.append(y)
                 ancho_pantalla.append(x)
-    punto_0=(ancho_pantalla[0],altura_pantalla[0])
-    punto_1=(ancho_pantalla[-1],altura_pantalla[-1])
-    return punto_0,punto_1
+    punto_0=(min(ancho_pantalla),altura_pantalla[0])
+    punto_1=(max(ancho_pantalla),altura_pantalla[-1])
+    return punto_0,punto_1,mascara
 
-def pantalla_gameboy(matriz,punto_0,punto_1):
-    gameboy= Image.open("gameboy.png")
-    mascara=Image.open("gameboy_mascara.png")
+def pantalla_gameboy(matriz,punto_0,punto_1,mascara):
+    alto,ancho=mascara.shape
+    marco= Image.open("gameboy.png")
+    gameboy= np.array(marco.resize((ancho,alto)))
+
     nuevo_ancho=punto_1[0]-punto_0[0]+1
     nuevo_alto=punto_1[1]-punto_0[1]+1
-    foto= matriz.resize(nuevo_ancho,nuevo_alto)
-    alto,ancho=mascara.shape
+    filtro=Image.fromarray(matriz)
+    foto= np.array(filtro.resize((nuevo_ancho,nuevo_alto)))
+
     for y in range(alto):
         for x in range(ancho):
-            pixel= mascara[y,x]
-            if pixel==0:
-                pixel=gameboy[y,x]
+            pixel=mascara[y,x]
+            if pixel==255:
+                gameboy[y, x]=foto[y-punto_0[1],x-punto_0[0]]
+
+    return Image.fromarray(gameboy)
+
+matriz = convertir_imagen(ruta)
+punto_0, punto_1, mascara = dimension_pantalla()
+resultado = pantalla_gameboy(matriz, punto_0, punto_1, mascara)
+resultado.show()
